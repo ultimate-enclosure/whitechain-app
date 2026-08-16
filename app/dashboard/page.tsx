@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import { TransactionHistorySection } from '@/components/TransactionHistorySection';
@@ -10,12 +10,23 @@ import { SendModal } from '@/components/SendModal';
 import { PortfolioAssets } from '@/components/PortfolioAssets';
 import { VaultTable } from '@/components/vaults/VaultTable';
 import { PluginGrid } from '@/components/dashboard/PluginGrid';
-
 import { SwapCard } from '@/components/swap/SwapCard';
-
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ProtocolStatsBar } from '@/components/dashboard/ProtocolStatsBar';
 import { RecentSwaps } from '@/components/dashboard/RecentSwaps';
+import { SkeletonLoader } from '@/components/SkeletonLoader';
+
+// Lazy-load the chart component so recharts and its dependencies are
+// only fetched when the chart section is rendered on the dashboard.
+// webpack extracts the charting vendor code into a separate async chunk
+// via the 'charts' cacheGroup in next.config.mjs (issue #89).
+const PriceChart = lazy(() => import('@/components/Charts/PriceChart'));
+
+// Sample price data for demonstration — replace with API data in production.
+const samplePriceData = Array.from({ length: 24 }, (_, i) => ({
+  time: `${String(i).padStart(2, '0')}:00`,
+  price: 1.0 + Math.sin(i / 4) * 0.05 + (Math.random() - 0.5) * 0.02
+}));
 
 export default function DashboardPage() {
   const { t } = useTranslation();
@@ -36,10 +47,23 @@ export default function DashboardPage() {
           </ErrorBoundary>
         </section>
 
-        <section id="staking" className="card">
-          <h2 className="text-sm font-semibold text-gray-900">Staking</h2>
+        {/* Price chart section — lazy-loaded, chunked separately (issue #89) */}
+        <section id="price-chart" className="card lg:col-span-2">
           <ErrorBoundary>
-            <p className="mt-2 text-sm text-gray-600">No active stakes yet.</p>
+            <Suspense fallback={
+              <div className="h-72 flex items-center justify-center">
+                <div className="w-full max-w-2xl space-y-3">
+                  <SkeletonLoader height="1rem" width="40%" />
+                  <SkeletonLoader height="220px" />
+                </div>
+              </div>
+            }>
+              <PriceChart data={samplePriceData} title={t('dashboard.priceChart')} />
+            </Suspense>
+          </ErrorBoundary>
+        </section>
+
+        <section id="staking" className="card">
           <h2 className="text-sm font-semibold text-gray-900">{t('dashboard.staking')}</h2>
           <ErrorBoundary>
             <p className="mt-2 text-sm text-gray-600">{t('dashboard.noStakes')}</p>
@@ -74,18 +98,12 @@ export default function DashboardPage() {
           <CachedActivity />
         </ErrorBoundary>
 
-        {/* useSearchParams (page state, #15) requires a Suspense boundary. */}
         <Suspense fallback={null}>
           <ErrorBoundary>
             <TransactionHistorySection />
           </ErrorBoundary>
         </Suspense>
 
-        {/*
-         * Community plugin widgets — renders nothing when no plugins are
-         * registered, so existing layout is unaffected by default.
-         * Plugins register themselves via usePluginSDK().registerPlugin().
-         */}
         <ErrorBoundary>
           <PluginGrid />
         </ErrorBoundary>

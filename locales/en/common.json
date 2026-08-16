@@ -6,7 +6,7 @@
     "cancel": "Cancel",
     "send": "Send",
     "max": "Max",
-    "loading": "Loading…",
+    "loading": "Loading\u2026",
     "theme": "Theme",
     "save": "Save",
     "confirm": "Confirm",
@@ -36,7 +36,8 @@
     "hideMenu": "Hide menu",
     "noStakes": "No active stakes yet.",
     "noProposals": "No open proposals.",
-    "sendAsset": "Send asset"
+    "sendAsset": "Send asset",
+    "priceChart": "Price Chart"
   },
   "wallet": {
     "connectWallet": "Connect a wallet",
@@ -83,7 +84,7 @@
     "type": "Type",
     "amount": "Amount",
     "title": "Transaction history",
-    "transactionsSummary": "transactions (mock data) — page {{page}} of {{totalPages}}",
+    "transactionsSummary": "transactions (mock data) \u2014 page {{page}} of {{totalPages}}",
     "prev": "Prev",
     "next": "Next",
     "page": "Page {{page}} / {{totalPages}}"
@@ -104,7 +105,7 @@
     "noWallet": "No injected wallet found. Please connect a wallet."
   },
   "txToasts": {
-    "pending": "Transaction pending…",
+    "pending": "Transaction pending\u2026",
     "confirmWallet": "Confirm the transaction in your wallet.",
     "sent": "Transaction sent",
     "broadcast": "Your transaction was broadcast to the network.",
@@ -153,7 +154,7 @@
     "yourStake": "Your Deposited Stake",
     "amountLabel": "{{action}} Amount",
     "useMax": "Use Max",
-    "processing": "Processing…",
+    "processing": "Processing\u2026",
     "confirmStake": "Confirm Stake",
     "confirmUnstake": "Confirm Unstake",
     "cancel": "Cancel",
@@ -171,7 +172,7 @@
   },
   "sandbox": {
     "pluginError": "Plugin error",
-    "loadingPlugin": "Loading plugin…",
+    "loadingPlugin": "Loading plugin\u2026",
     "unknownError": "An unknown error occurred."
   },
   "pluginCard": {
@@ -180,10 +181,10 @@
   "language": {
     "selector": "Select language",
     "en": "English",
-    "es": "Español",
-    "zh": "中文",
-    "ja": "日本語",
-    "ar": "العربية"
+    "es": "Espa\u00f1ol",
+    "zh": "\u4e2d\u6587",
+    "ja": "\u65e5\u672c\u8a9e",
+    "ar": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629"
   },
   "currency": {
     "selector": "Select display currency"

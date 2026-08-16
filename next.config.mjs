@@ -6,10 +6,8 @@ const nextConfig = {
     }
   },
   images: {
-    // Next's optimizer negotiates WebP with supported browsers.
     formats: ['image/webp'],
     remotePatterns: [
-      // Common token metadata/CDN hosts.
       {
         protocol: 'https',
         hostname: 'assets.coingecko.com',
@@ -25,7 +23,6 @@ const nextConfig = {
         hostname: 'images.coingecko.com',
         pathname: '/**'
       },
-      // Common ENS avatar and third-party plugin icon hosts.
       {
         protocol: 'https',
         hostname: 'metadata.ens.domains',
@@ -54,21 +51,33 @@ const nextConfig = {
     ]
   },
   webpack: (config) => {
-    // @coinbase/cdp-sdk (pulled in transitively by the Coinbase Wallet connector)
-    // references optional x402 payment packages we don't install or use.
     config.resolve.alias = {
       ...config.resolve.alias,
       '@x402/core/client': false,
       '@x402/svm/exact/client': false,
       '@x402/evm': false,
-      // @walletconnect/logger (via pino) tries to require 'pino-pretty'
-      // at runtime; it is an optional dev-only pretty-printer we never use.
-      // Stubbing it removes the noisy "Module not found" build warning.
       'pino-pretty': false,
-      // @metamask/sdk references a React-Native-only async storage module that
-      // does not exist in a web build; stub it so the import resolves to nothing.
       '@react-native-async-storage/async-storage': false
     };
+
+    // Route-level code splitting for charting libraries (issue #89).
+    // Charting vendors (recharts, d3, lightweight-charts, etc.) are
+    // extracted into a separate async 'vendor-charts' chunk that is only
+    // fetched when a chart component is rendered via React.lazy(). This
+    // keeps them out of the initial First Load JS on non-chart routes.
+    if (config.optimization && config.optimization.splitChunks) {
+      config.optimization.splitChunks.cacheGroups = {
+        ...config.optimization.splitChunks.cacheGroups,
+        charts: {
+          test: /[\\/]node_modules[\\/](recharts|d3|d3-|victory|lightweight-charts|tradingview)[\\/]/,
+          name: 'vendor-charts',
+          chunks: 'async',
+          priority: 20,
+          reuseExistingChunk: true
+        }
+      };
+    }
+
     return config;
   }
 };
