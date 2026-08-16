@@ -187,5 +187,18 @@
   },
   "currency": {
     "selector": "Select display currency"
+  },
+  "siwe": {
+    "statement": "Sign in with Ethereum to WhiteChain to sync your preferences across devices.",
+    "signInTitle": "Sign in to sync preferences",
+    "signInDesc": "Sign in with your wallet to persist your theme, slippage, and other settings across devices.",
+    "signInButton": "Sign in with Ethereum",
+    "signingIn": "Signing in…",
+    "signedIn": "Signed in",
+    "rejected": "Sign-in was rejected.",
+    "error": "An unexpected error occurred during sign-in.",
+    "theme": "Theme",
+    "currency": "Currency",
+    "language": "Language"
   }
 }

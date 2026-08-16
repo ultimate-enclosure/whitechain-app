@@ -187,5 +187,18 @@
   },
   "currency": {
     "selector": "通貨を選択"
+  },
+  "siwe": {
+    "statement": "WhiteChain にイーサリアムでログインし、設定をデバイス間で同期します。",
+    "signInTitle": "設定を同期するにはログイン",
+    "signInDesc": "ウォレットでログインすると、テーマ・スリッページ・その他の設定をデバイス間で同期できます。",
+    "signInButton": "イーサリアムでログイン",
+    "signingIn": "ログイン中…",
+    "signedIn": "ログイン済み",
+    "rejected": "ログインが拒否されました。",
+    "error": "ログイン中に予期しないエラーが発生しました。",
+    "theme": "テーマ",
+    "currency": "通貨",
+    "language": "言語"
   }
 }

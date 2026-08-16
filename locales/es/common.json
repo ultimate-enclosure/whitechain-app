@@ -187,5 +187,18 @@
   },
   "currency": {
     "selector": "Seleccionar moneda"
+  },
+  "siwe": {
+    "statement": "Inicia sesión con Ethereum en WhiteChain para sincronizar tus preferencias entre dispositivos.",
+    "signInTitle": "Inicia sesión para sincronizar preferencias",
+    "signInDesc": "Inicia sesión con tu cartera para conservar el tema, el deslizamiento y otros ajustes en todos tus dispositivos.",
+    "signInButton": "Iniciar sesión con Ethereum",
+    "signingIn": "Iniciando sesión…",
+    "signedIn": "Sesión iniciada",
+    "rejected": "El inicio de sesión fue rechazado.",
+    "error": "Se produjo un error inesperado al iniciar sesión.",
+    "theme": "Tema",
+    "currency": "Moneda",
+    "language": "Idioma"
   }
 }

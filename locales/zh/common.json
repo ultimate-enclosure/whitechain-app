@@ -187,5 +187,18 @@
   },
   "currency": {
     "selector": "选择货币"
+  },
+  "siwe": {
+    "statement": "使用以太坊登录 WhiteChain，跨设备同步您的偏好设置。",
+    "signInTitle": "登录以同步偏好设置",
+    "signInDesc": "使用钱包登录，以便在设备间同步您的主题、滑点和其他设置。",
+    "signInButton": "使用以太坊登录",
+    "signingIn": "登录中…",
+    "signedIn": "已登录",
+    "rejected": "登录请求已被拒绝。",
+    "error": "登录时发生意外错误。",
+    "theme": "主题",
+    "currency": "货币",
+    "language": "语言"
   }
 }
